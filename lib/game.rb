@@ -1,3 +1,5 @@
+require("./lib/letter.rb")
+
 class Game
 	attr_accessor :visible, :choosen, :playing, :lives
 
@@ -15,22 +17,22 @@ class Game
 		@lives = 10
 
 		# Visible words hash
-		@visible = {}
-
+		@visible = []
+ 
 		start
 	end
 
 	def start
 		# Initialize each letter to hash
 		@choosen.each_char do |letter|
-			@visible[letter]  = false
+			@visible << Letter.new(letter)
 		end
 
 		# Game Loop
 		loop do
 		@playing = true
 			# Stop the game when all visible
-			if @visible.values.all? {|i| i == true}
+			if @visible.all? {|let| let.visible == true}
 				@playing = false
 			end
 
@@ -58,9 +60,9 @@ class Game
 		system "clear"
 		puts @choosen
 		puts "You have #{@lives} lives left." 
-		@visible.each do |letter,visible|
-			print "_ " unless visible
-			print "#{letter} " if visible
+		@visible.each do |letter|
+			print "_ " unless letter.visible
+			print "#{letter.letter} " if letter.visible
 		end
 		puts
 	end
@@ -72,9 +74,9 @@ class Game
 		end
 		# Show the word that is guessed
 		found = false
-		@visible.each do |letter,visible|
-			if letter.downcase == input.downcase
-				@visible[letter] = true
+		@visible.each_with_index do |let,index|
+			if let.letter.downcase == input.downcase
+				@visible[index].visible = true
 				found = true
 			end
 		end
