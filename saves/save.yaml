@@ -1,21 +1,53 @@
 --- !ruby/object:Game
 words: 
-choosen: elute
-lives: 10
+choosen: Hippocratic
+lives: 1
 visible:
 - !ruby/object:Letter
-  letter: e
+  letter: H
+  visible: false
+- !ruby/object:Letter
+  letter: i
   visible: true
 - !ruby/object:Letter
-  letter: l
+  letter: p
   visible: false
 - !ruby/object:Letter
-  letter: u
+  letter: p
   visible: false
+- !ruby/object:Letter
+  letter: o
+  visible: true
+- !ruby/object:Letter
+  letter: c
+  visible: true
+- !ruby/object:Letter
+  letter: r
+  visible: false
+- !ruby/object:Letter
+  letter: a
+  visible: true
 - !ruby/object:Letter
   letter: t
+  visible: false
+- !ruby/object:Letter
+  letter: i
   visible: true
 - !ruby/object:Letter
-  letter: e
+  letter: c
   visible: true
+used:
+- a
+- e
+- i
+- o
+- u
+- uu
+- xgdgn
+- d
+- x
+- c
+- y
+- j
+- l
 playing: true

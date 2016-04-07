@@ -18,6 +18,8 @@ class Game
 		# Visible words hash
 		@visible = []
  
+		# Played leters
+		@used = []
 
 	 	# Initialize each letter to hidden
 		@choosen.each_char do |letter|
@@ -70,6 +72,7 @@ class Game
 	def render
 		system "clear"
 		puts "You have #{@lives} lives left." 
+		puts "Used letters: #{@used.join(',')}"
 		@visible.each do |letter|
 			print "_ " unless letter.visible
 			print "#{letter.letter} " if letter.visible
@@ -103,9 +106,10 @@ class Game
 				found = true
 			end
 		end
-		@lives -= 1 if !found
-	end
 
+		@lives -= 1 if !found && !@used.include?(input)
+		@used << input if !@used.include?(input)
+	end
 	# load the dictionary list
 	def load_dictionary
 		@words = []
