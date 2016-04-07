@@ -1,0 +1,21 @@
+--- !ruby/object:Game
+words: 
+choosen: elute
+lives: 10
+visible:
+- !ruby/object:Letter
+  letter: e
+  visible: true
+- !ruby/object:Letter
+  letter: l
+  visible: false
+- !ruby/object:Letter
+  letter: u
+  visible: false
+- !ruby/object:Letter
+  letter: t
+  visible: true
+- !ruby/object:Letter
+  letter: e
+  visible: true
+playing: true

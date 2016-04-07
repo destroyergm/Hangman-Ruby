@@ -1,8 +1,7 @@
 require("./lib/letter.rb")
+require("yaml")
 
 class Game
-	attr_accessor :visible, :choosen, :playing, :lives
-
 	def initialize
 		load_dictionary
 
@@ -19,15 +18,27 @@ class Game
 		# Visible words hash
 		@visible = []
  
-		start
-	end
 
-	def start
-		# Initialize each letter to hash
+	 	# Initialize each letter to hidden
 		@choosen.each_char do |letter|
 			@visible << Letter.new(letter)
 		end
 
+		start
+	end
+
+	def self.load_from_file
+		obj = nil
+		File.open("saves/save.yaml","r") do |file|
+			obj = file.readlines
+		end
+		# initialize the game instance from a file
+		game_instance = YAML::load(obj.join)
+		# start the game instance
+		game_instance.start
+	end
+
+	def start
 		# Game Loop
 		loop do
 		@playing = true
@@ -47,7 +58,7 @@ class Game
 		end
 
 		# game over
-		if lives == 0
+		if @lives == 0
 			game_over
 		else
 			# win
@@ -58,7 +69,6 @@ class Game
 	private
 	def render
 		system "clear"
-		puts @choosen
 		puts "You have #{@lives} lives left." 
 		@visible.each do |letter|
 			print "_ " unless letter.visible
@@ -69,7 +79,20 @@ class Game
 
 	def user_input
 		# Repeat untill valid input
+		print "Guess a letter: "
 		until (input = gets.chomp) =~ /[a-z]|[A-Z]/ do
+			# save special character
+			if(input == "~") 
+				# Save game
+				object = YAML::dump(self);
+				puts "Saved!"
+				File.open("saves/save.yaml","w") do |file|
+					file.write object 
+					file.close
+				end
+				# exit program
+				exit
+			end
 			print "Wrong input, enter again: "
 		end
 		# Show the word that is guessed
@@ -101,5 +124,3 @@ class Game
 		puts "You lose! The word was #{@choosen}"
 	end
 end
-
-Game.new

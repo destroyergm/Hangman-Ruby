@@ -3,7 +3,7 @@ require ("./lib/game.rb")
 version = "1.0.0"
 
 puts "Welcome to Hangman #{version} - by Stefan ( Destroyergm )"
-puts "You can same anytime by typing ~save in game"
+puts "You can save anytime by typing ~ in game"
 puts "Action: "
 puts "New Game [1]"
 puts "Load Game [2]"
@@ -16,8 +16,11 @@ when 1
 	Game.new
 when 2
 	# Load a game
+	Game.load_from_file
 when 3
 	# Exit the application
+	exit
 else
 	# Wrong input was parsed
+	puts "Invalid argument error."
 end
