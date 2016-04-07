@@ -13,7 +13,7 @@ input = gets.chomp.to_i
 case input
 when 1
 	# Launch a new game
-	Game.new.start
+	Game.new
 when 2
 	# Load a game
 when 3

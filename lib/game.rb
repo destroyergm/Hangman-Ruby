@@ -17,7 +17,6 @@ class Game
 		# Visible words hash
 		@visible = {}
 
-		puts @choosen
 		start
 	end
 
@@ -40,7 +39,7 @@ class Game
 
 			# Game over condtions
 			break unless @playing
-			break if @lvies == 0
+			break if @lives == 0
 			user_input
 			puts @visible
 		end
@@ -56,6 +55,8 @@ class Game
 
 	private
 	def render
+		system "clear"
+		puts @choosen
 		puts "You have #{@lives} lives left." 
 		@visible.each do |letter,visible|
 			print "_ " unless visible
@@ -90,9 +91,12 @@ class Game
 	end
 
 	def win
+		puts "Thanks for playing :)"
 	end
 
 	def game_over
+		puts "Thanks for playing"
+		puts "You lose! The word was #{@choosen}"
 	end
 end
 
