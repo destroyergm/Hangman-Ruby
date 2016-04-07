@@ -1,3 +1,5 @@
+require ("./lib/game.rb")
+
 version = "1.0.0"
 
 puts "Welcome to Hangman #{version} - by Stefan ( Destroyergm )"
@@ -11,6 +13,7 @@ input = gets.chomp.to_i
 case input
 when 1
 	# Launch a new game
+	Game.new.start
 when 2
 	# Load a game
 when 3
